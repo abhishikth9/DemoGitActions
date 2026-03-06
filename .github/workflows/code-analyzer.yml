@@ -1,0 +1,39 @@
+name: Salesforce Code Analyzer v5
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+jobs:
+  code-analyzer:
+    permissions:
+      pull-requests: write
+      contents: read
+      actions: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Set up Java 21 (required by PMD engine)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run Salesforce Code Analyzer v5
+        id: run-code-analyzer
+        uses: forcedotcom/run-code-analyzer@v2
+        with:
+          run-arguments: --output-file sfca_results.html --output-file sfca_results.json
+          results-artifact-name: code-analyzer-results
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fail on Sev1/Sev2 or >10 violations
+        if: |
+          steps.run-code-analyzer.outputs.exit-code > 0 ||
+          steps.run-code-analyzer.outputs.num-sev1-violations > 0 ||
+          steps.run-code-analyzer.outputs.num-sev2-violations > 0 ||
+          steps.run-code-analyzer.outputs.num-violations > 10
+        run: exit 1
+

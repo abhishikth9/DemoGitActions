@@ -1,0 +1,20 @@
+{
+  "name": "my-salesforce-project",
+  "version": "1.0.0",
+  "description": "Salesforce DX project",
+  "scripts": {
+    "lint": "eslint **/{lwc,aura}/**/*.js",
+    "test": "jest --coverage",
+    "test:unit": "jest",
+    "prettier": "prettier --write \"**/*.{cls,trigger,apex,js,html,css,json,xml,md}\""
+  },
+  "devDependencies": {
+    "@prettier/plugin-apex": "^3.0.0",
+    "prettier-plugin-apex": "^3.0.0",
+    "@salesforce/eslint-config-lwc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "@salesforce/sfdx-lwc-jest": "^3.1.0",
+    "@lwc/jest-transformer": "^7.0.0",
+    "@lwc/jest-resolver": "^7.0.0"
+  }
+}

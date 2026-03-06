@@ -1,0 +1,39 @@
+name: CodeQL Security Scanning
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'force-app/**/aura/**'
+      - 'force-app/**/lwc/**'
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'force-app/**/aura/**'
+      - 'force-app/**/lwc/**'
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    strategy:
+      matrix:
+        language: ['javascript-typescript']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+          build-mode: none
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+

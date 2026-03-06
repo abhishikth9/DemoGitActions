@@ -1,0 +1,22 @@
+name: Deploy to Salesforce
+on:
+  push:
+    branches: ["main"]
+    paths: ['force-app/**']
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli@latest
+      - name: Authenticate
+        run: echo "${{ secrets.SFDX_AUTH_URL }}" | sf org login sfdx-url --set-default --stdin
+      - name: Deploy
+        run: sf project deploy start --source-dir force-app --test-level RunLocalTests --wait 30
+

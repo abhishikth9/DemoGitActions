@@ -1,0 +1,12 @@
+{
+  "salesforcedx-vscode-core.push-or-deploy-on-save.enabled": false,
+  "salesforcedx-vscode-core.retrieve-test-code-coverage": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[apex]": { "editor.defaultFormatter": "salesforce.salesforcedx-vscode-apex" },
+  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "salesforce.defaultOrg": "my-org",
+  "git.autofetch": true,
+  "git.confirmSync": false
+}

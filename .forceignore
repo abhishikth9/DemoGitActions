@@ -1,0 +1,6 @@
+# Salesforce DX .forceignore v2
+**/jsconfig.json
+**/.eslintrc.json
+**/lwc/**/__tests__/**
+package.json
+jest.config.js
