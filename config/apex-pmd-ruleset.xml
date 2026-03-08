@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Apex PMD Ruleset" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+  <description>Apex PMD ruleset for my-salesforce-project</description>
+  <rule ref="category/apex/bestpractices.xml"/>
+  <rule ref="category/apex/codesize.xml"/>
+  <rule ref="category/apex/errorprone.xml"/>
+  <rule ref="category/apex/performance.xml"/>
+  <rule ref="category/apex/security.xml"/>
+  <rule ref="category/apex/design.xml">
+    <exclude name="ExcessiveClassLength"/>
+  </rule>
+</ruleset>
